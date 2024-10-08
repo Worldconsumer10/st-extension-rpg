@@ -37,6 +37,7 @@ jQuery(async ()=>{
         function findDataFromAttribute(attribute){
             const charName = getCharacterName(); // Get the current character name
             const chatId = getChatId(); // Get the current chat ID
+            const forPlayer = Boolean(newEntry.find('.forUserCheckbox').val())
         
             // Check if the character settings exist
             if (typeof extension_settings[extensionName][charName] !== "undefined") {
@@ -44,7 +45,7 @@ jQuery(async ()=>{
         
                 // Search for the matching attribute in the chatProperties
                 for (let prop of chatProperties) {
-                    if (prop.attribute === attribute) {
+                    if (prop.attribute === attribute && prop.isPlayer == forPlayer) {
                         return {
                             triggerWords: prop.triggerWords,
                             maxValue: prop.maxValue,
@@ -63,12 +64,14 @@ jQuery(async ()=>{
             const triggerWords = newEntry.find('.trigger_keywords').val().trim();
             const attribute = newEntry.find('.attribute_word').val().trim();
             const maxValue = newEntry.find('.max_value').val().trim() || '0';
+            const forPlayer = Boolean(newEntry.find('.forUserCheckbox').val())
             const chatId = getChatId();
             const currentData = {
                 isDefault: isDefault,
                 triggerWords: triggerWords,
                 attribute: attribute,
                 maxValue: maxValue,
+                isPlayer:forPlayer,
                 current: maxValue // Initial current value set to max value
             };
     
