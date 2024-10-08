@@ -31,7 +31,7 @@ function addAttributes(){
         const message = recentMessages[name];
         // Remove any existing attributes from all messages of this character
         messages.each(function() {
-            if ($(this).find('.name_text').text().trim() === charName) {
+            if ($(this).find('.name_text').text().trim() === name) {
                 $(this).find("small").remove(); // Remove <small> elements from this character's messages
             }
         });
