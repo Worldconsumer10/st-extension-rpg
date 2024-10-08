@@ -44,7 +44,9 @@ function addAttributes(){
         }
     }
 }
-
+eventSource.on(event_types.CHAT_CHANGED, function(){
+    addAttributes()
+});
 jQuery(async ()=>{
     if (typeof(extension_settings[extensionName]) == "undefined")
     {extension_settings[extensionName]={}; saveSettingsDebounced()}
