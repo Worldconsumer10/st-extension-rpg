@@ -8,6 +8,11 @@ import {
 const extensionName = "st-extension-rpg";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
 
+function onCharAdvChanged(){
+    setAttributeDisplay()
+    addAttributes()
+}
+
 function generateIntercepted(chat){
     try{
         addAttributes()
@@ -20,11 +25,15 @@ function setAttributeDisplay(){
     {
         const chatProperties = extension_settings[extensionName][username].chatProperties;
         $("#user_attribute_count").text(`${username}'s Attributes: ${chatProperties.length}`)
+    } else {
+        $("#user_attribute_count").text(`${username}'s Attributes: 0`)
     }
     if (typeof(extension_settings[extensionName]) != "undefined"&& typeof(extension_settings[extensionName][charname]) != "undefined")
     {
         const chatProperties = extension_settings[extensionName][charname].chatProperties;
         $("#char_attribute_count").text(`${charname}'s Attributes: ${chatProperties.length}`)
+    } else {
+        $("#char_attribute_count").text(`${charname}'s Attributes: 0`)
     }
 }
 
@@ -70,9 +79,7 @@ function addAttributes(){
         }
     }
 }
-eventSource.on(event_types.CHAT_CHANGED, function(){
-    addAttributes()
-});
+eventSource.on(event_types.CHAT_CHANGED, onCharAdvChanged);
 jQuery(async ()=>{
     if (typeof(extension_settings[extensionName]) == "undefined")
     {extension_settings[extensionName]={}; saveSettingsDebounced()}
@@ -80,6 +87,20 @@ jQuery(async ()=>{
     const element2 = await $.get(`${extensionFolderPath}/rpgEntry.html`);
     $("#character_popup").children().eq(4).after(element)
     $("#rpg_data_content").append(element2)
+
+    // Handle advanced selection changed
+    
+    const target = $('#character_popup-button-h3')[0];
+    const observer = new MutationObserver(function(mutationsList, observer) {
+        for (let mutation of mutationsList) {
+            if (mutation.type === 'childList' || mutation.type === 'characterData') {
+                onCharAdvChanged()
+            }
+        }
+    });
+    observer.observe(target, { characterData: true, childList: true, subtree: true });
+
+
     $('#advanced_rpg_add_element').on('click', function() {
         const charName = getCharacterName();
         const template = $('#entryTemplate');
@@ -164,6 +185,7 @@ jQuery(async ()=>{
             // Check if chatProperties already has an entry for this chatId
             const existingProps = extension_settings[extensionName][targetName].chatProperties.find(prop => prop.chatId === chatId);
             
+            setAttributeDisplay()
             if (existingProps) {
                 // Update existing entry
                 Object.assign(existingProps, {
