@@ -65,22 +65,17 @@ function addAttributes(){
         {continue}
         const chatProperties = extension_settings[extensionName][name].chatProperties;
 
-        // Find the relevant attribute data (assuming you want to find a specific attribute)
-        var attributeData = chatProperties.find(prop => prop.chatId === chatId); 
-        if (!attributeData)
-        {attributeData = chatProperties.find(_=>true)}
-
 
         // Add attributes to the recent message
         console.log("Adding Attributes To Entity")
-        if (attributeData) {
+        chatProperties.forEach(element => {
             console.log("Added Attributes To Entity")
-            const { attribute, maxValue, current } = attributeData;
+            const { attribute, maxValue, current } = element;
             const attributesHtml = `
                 <small>${attribute}: ${current}/${maxValue}</small>
             `;
             message.prepend(attributesHtml); // Append the attributes to the most recent message
-        }
+        });
     }
 }
 eventSource.on(event_types.CHAT_CHANGED, onCharAdvChanged);
