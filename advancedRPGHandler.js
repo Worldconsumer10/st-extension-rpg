@@ -3,6 +3,8 @@ const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
 
 export async function addDropdown(){
     const element = await $.get(`${extensionFolderPath}/advancedTabRPG.html`);
-    $("#character_popup").children().eq(3).after(element)
+    const element2 = await $.get(`${extensionFolderPath}/rpgEntry.html`);
+    $("#character_popup").children().eq(4).after(element)
+    element.append(element2)
     print("Inserted advanced")
 }
