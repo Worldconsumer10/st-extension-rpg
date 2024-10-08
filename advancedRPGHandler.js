@@ -6,5 +6,5 @@ export async function addDropdown(){
     const element2 = await $.get(`${extensionFolderPath}/rpgEntry.html`);
     $("#character_popup").children().eq(4).after(element)
     $("#rpg_data_content").append(element2)
-    print("Inserted advanced")
+    console.log("Inserted advanced")
 }
