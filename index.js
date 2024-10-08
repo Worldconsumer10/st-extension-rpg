@@ -40,7 +40,7 @@ function addAttributes(){
             const attributesHtml = `
                 <small>${attribute}: ${current}/${maxValue}</small>
             `;
-            recentMessage.append(attributesHtml); // Append the attributes to the most recent message
+            recentMessage.prepend(attributesHtml); // Append the attributes to the most recent message
         }
     }
 }
