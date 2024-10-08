@@ -19,13 +19,24 @@ function addAttributes(){
     const messages = $(".mes"); // Select all messages with class "mes"
     const charName = getCharacterName(); // Get the current character name
 
-    console.log(messages)
-
     // Find the most recent message from any character
-    const recentMessage = messages.last(); // Get the most recent message regardless of the character
+    const recentMessages = {};
 
-    // If a recent message exists, process it
-    if (recentMessage.length) {
+    // Iterate over each message to find the most recent for each character
+    messages.each(function() {
+        const nameText = $(this).find('.name_text').text().trim();
+        recentMessages[nameText] = $(this); // Update with the latest message for each character
+    });
+
+    // Clear old attributes from messages of the current character
+    messages.each(function() {
+        const nameText = $(this).find('.name_text').text().trim();
+        if (nameText === charName) {
+            $(this).find("small").remove(); // Remove <small> elements from this character's messages
+        }
+    });
+    for (const name in recentMessages) {
+        const message = recentMessages[name];
         // Remove any existing attributes from all messages of this character
         messages.each(function() {
             if ($(this).find('.name_text').text().trim() === charName) {
@@ -45,7 +56,7 @@ function addAttributes(){
             const attributesHtml = `
                 <small>${attribute}: ${current}/${maxValue}</small>
             `;
-            recentMessage.prepend(attributesHtml); // Append the attributes to the most recent message
+            message.prepend(attributesHtml); // Append the attributes to the most recent message
         }
     }
 }
