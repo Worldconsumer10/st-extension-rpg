@@ -41,7 +41,6 @@ window['rpgStats_generationInterceptor'] = generateIntercepted;
 function addAttributes(){
     const messages = $(".mes"); // Select all messages with class "mes"
     const chatId = getContext().chatId
-
     // Find the most recent message from any character
     const recentMessages = {};
 
@@ -63,13 +62,9 @@ function addAttributes(){
         // Access chat properties for the current character
         if (typeof(extension_settings[extensionName]) == "undefined" || typeof(extension_settings[extensionName][name]) == "undefined")
         {continue}
-        const chatProperties = extension_settings[extensionName][name].chatProperties;
+        const chatProperties = extension_settings[extensionName][name].chatProperties.filter(x=>x.chatId==chatId);
 
-
-        // Add attributes to the recent message
-        console.log("Adding Attributes To Entity")
         chatProperties.forEach(element => {
-            console.log("Added Attributes To Entity")
             const { attribute, maxValue, current } = element;
             const attributesHtml = `
                 <small>${attribute}: ${current}/${maxValue}</small>
