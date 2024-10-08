@@ -76,9 +76,9 @@ jQuery(async ()=>{
         newEntry.find('.forUserCheckbox').on('input',function(){
             const val = Boolean($(this).val())
             if (val)
-            {$(this).show()}
+            {newEntry.find('.saveDefault').show()}
             else
-            {$(this).hide()}
+            {newEntry.find('.saveDefault').hide()}
         })
 
         // Handle trigger keywords input
