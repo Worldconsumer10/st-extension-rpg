@@ -66,7 +66,10 @@ function addAttributes(){
         const chatProperties = extension_settings[extensionName][name].chatProperties;
 
         // Find the relevant attribute data (assuming you want to find a specific attribute)
-        const attributeData = chatProperties.find(prop => prop.chatId === chatId); // Replace 'yourAttribute' with the actual attribute
+        var attributeData = chatProperties.find(prop => prop.chatId === chatId); 
+        if (!attributeData)
+        {attributeData = chatProperties.find(_=>true)}
+
 
         // Add attributes to the recent message
         console.log("Adding Attributes To Entity")
