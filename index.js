@@ -181,6 +181,9 @@ jQuery(async ()=>{
             if (forPlayer){
                 targetName = username
             }
+            if (typeof(extension_settings[extensionName][targetName]) == "undefined"){
+                extension_settings[extensionName][targetName] = {chatProperties: []}
+            }
                 
             // Check if chatProperties already has an entry for this chatId
             const existingProps = extension_settings[extensionName][targetName].chatProperties.find(prop => prop.chatId === chatId);
