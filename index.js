@@ -71,8 +71,15 @@ jQuery(async ()=>{
     
         newEntry.find('.saveDefault').on('click', function() {
             saveData(true)
-            $(this).remove()
+            $(this).hide()
         });
+        newEntry.find('.forUserCheckbox').on('input',function(){
+            const val = Boolean($(this).val())
+            if (val)
+            {$(this).show()}
+            else
+            {$(this).hide()}
+        })
 
         // Handle trigger keywords input
         newEntry.find('.trigger_keywords').on('input', function() {
