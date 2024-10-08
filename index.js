@@ -101,6 +101,7 @@ jQuery(async ()=>{
     
         newEntry.find('.saveDefault').on('click', function() {
             saveData(true)
+            $("#advanced_rpg_reset_character").show()
         });
     
         // Handle attribute input
@@ -126,5 +127,22 @@ jQuery(async ()=>{
         });
     
         $('#entriesContainer').append(newEntry); // Append the new entry
-    });    
+    });
+    $("#advanced_rpg_reset_character").on('click',function(){
+        const charName = getCharacterName();
+    
+        // Attribute storage method
+        if (typeof(extension_settings[extensionName][charName]) != "undefined") {
+            var filtedChat = []
+            for (let i = 0; i < extension_settings[extensionName][charName].chatProperties.length; i++) {
+                const element = extension_settings[extensionName][charName].chatProperties[i];
+                if (!element.isDefault)
+                {filtedChat.push(element)}
+            }
+            extension_settings[extensionName][charName] = {
+                chatProperties: filtedChat
+            };
+            saveSettingsDebounced();
+        }
+    })
 })
