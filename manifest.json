@@ -1,0 +1,11 @@
+{
+    "display_name": "RPG Characters",
+    "loading_order": 1,
+    "requires": ["summary"],
+    "optional": [],
+    "js": "index.js",
+    "css": "style.css",
+    "author": "Ubunifu",
+    "version": "1.0.0",
+    "auto_update": true
+}
