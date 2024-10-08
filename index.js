@@ -25,7 +25,6 @@ jQuery(async ()=>{
         // Attribute storage method
         if (typeof(extension_settings[extensionName][charName]) == "undefined") {
             extension_settings[extensionName][charName] = {
-                defaults: [],
                 chatProperties: []
             };
             saveSettingsDebounced();
@@ -35,6 +34,30 @@ jQuery(async ()=>{
             newEntry.remove(); // Remove the entry when the remove button is clicked
         });
     
+        function findDataFromAttribute(attribute){
+            const charName = getCharacterName(); // Get the current character name
+            const chatId = getChatId(); // Get the current chat ID
+        
+            // Check if the character settings exist
+            if (typeof extension_settings[extensionName][charName] !== "undefined") {
+                const chatProperties = extension_settings[extensionName][charName].chatProperties;
+        
+                // Search for the matching attribute in the chatProperties
+                for (let prop of chatProperties) {
+                    if (prop.attribute === attribute) {
+                        return {
+                            triggerWords: prop.triggerWords,
+                            maxValue: prop.maxValue,
+                            current: prop.current
+                        };
+                    }
+                }
+            }
+        
+            // Return null or an empty object if no match is found
+            return null;
+        }
+
         function saveData(isDefault){
             const triggerWords = newEntry.find('.trigger_keywords').val().trim();
             const attribute = newEntry.find('.attribute_word').val().trim();
@@ -71,26 +94,17 @@ jQuery(async ()=>{
     
         newEntry.find('.saveDefault').on('click', function() {
             saveData(true)
-            $(this).hide()
-        });
-        newEntry.find('.forUserCheckbox').on('input',function(){
-            const val = Boolean($(this).val())
-            if (val)
-            {newEntry.find('.saveDefault').show()}
-            else
-            {newEntry.find('.saveDefault').hide()}
-        })
-
-        // Handle trigger keywords input
-        newEntry.find('.trigger_keywords').on('input', function() {
-            const triggerWords = $(this).val().trim();
-            // You can add additional logic if needed
         });
     
         // Handle attribute input
         newEntry.find('.attribute_word').on('input', function() {
             const attribute = $(this).val().trim();
-            // You can add additional logic if needed
+            const existingData = findDataFromAttribute(attribute)
+            if (existingData == null){
+                return
+            }
+            newEntry.find('.trigger_keywords').val(existingData.triggerWords)
+            newEntry.find('.max_value').val(existingData.maxValue)
         });
     
         // Add input listener to only allow numbers in the max_value field
