@@ -14,18 +14,9 @@
 <!-- Hidden template for new entries -->
 <fieldset id="entryTemplate" style="display: none;">
     <div class="inline-drawer">
-        <label>
-            Trigger Keyword: 
-            <textarea class="text-pole" type="text" placeholder="Enter keyword" class="input-text">
-        </label><br/>
-        <label>
-            Attribute: 
-            <textarea class="text-pole" type="text" placeholder="HP, MP, etc." class="input-text">
-        </label><br/>
-        <label>
-            Max Attribute: 
-            <textarea class="text-pole" type="number" placeholder="Enter max value" class="input-text">
-        </label>
+        <textarea id="trigger_keywords" name="Keywords" data-i18n="Trigger Keywords" placeholder="Trigger Keywords" class="text_pole trigger_keywords" value="" autocomplete="off" form="form_create" rows="1"></textarea>
+        <textarea id="attribute_word" name="Attribute" data-i18n="Attribute" placeholder="Attribute: HP, MP, Stamina etc." class="text_pole attribute_word" value="" maxlength="100" autocomplete="off" form="form_create" rows="1"></textarea>
+        <textarea id="max_value" name="Max Value" data-i18n="Max Value" placeholder="What is the largest number this can be?" class="text_pole max_value" value="" autocomplete="off" form="form_create" rows="1"></textarea>
         <label title="For User" class="checkbox_label">
             <input class="checkbox" type="checkbox">
             <span data-i18n="For User">For User</span>
@@ -45,6 +36,16 @@
         // Add functionality to remove entry
         newEntry.querySelector('.removeEntry').addEventListener('click', function() {
             newEntry.remove();
+        });
+        newEntry.querySelector(".max_value").addEventListener('input', function() {
+            // Get the current value
+            let value = newEntry.querySelector('.max_value').value;
+
+            // Replace any non-digit characters
+            value = value.replace(/\D/g, '');
+
+            // Update the input field with the filtered value
+            newEntry.querySelector('.max_value').value = value;
         });
 
         document.getElementById('entriesContainer').appendChild(newEntry);
