@@ -13,6 +13,20 @@ function generateIntercepted(chat){
         addAttributes()
     }catch{}
 }
+function setAttributeDisplay(){
+    const username = getContext().name1
+    const charname = getCharacterName()
+    if (typeof(extension_settings[extensionName]) != "undefined"&& typeof(extension_settings[extensionName][username]) != "undefined")
+    {
+        const chatProperties = extension_settings[extensionName][username].chatProperties;
+        $("#user_attribute_count").text(`${username}'s Attributes: ${chatProperties.length}`)
+    }
+    if (typeof(extension_settings[extensionName]) != "undefined"&& typeof(extension_settings[extensionName][charname]) != "undefined")
+    {
+        const chatProperties = extension_settings[extensionName][charname].chatProperties;
+        $("#char_attribute_count").text(`${charname}'s Attributes: ${chatProperties.length}`)
+    }
+}
 
 window['rpgStats_generationInterceptor'] = generateIntercepted;
 function addAttributes(){
@@ -38,7 +52,7 @@ function addAttributes(){
 
         // Access chat properties for the current character
         if (typeof(extension_settings[extensionName]) == "undefined" || typeof(extension_settings[extensionName][name]) == "undefined")
-        {return;}
+        {continue}
         const chatProperties = extension_settings[extensionName][name].chatProperties;
 
         // Find the relevant attribute data (assuming you want to find a specific attribute)
