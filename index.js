@@ -5,7 +5,9 @@ import { addDropdown } from "./advancedRPGHandler.js"
 
 jQuery(()=>{
     addDropdown()
+    console.log("Adding Listener")
     $('#advanced_rpg_add_element').on('click', function() {
+        console.log("Adding Element")
         const template = $('#entryTemplate');
         const newEntry = template.clone().show(); // Clone and show the entry
         newEntry.find('.removeEntry').on('click', function() {
