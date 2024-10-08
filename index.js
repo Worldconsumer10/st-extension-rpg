@@ -36,11 +36,9 @@ function addAttributes(){
 
         // Add attributes to the recent message
         if (attributeData) {
-            const { triggerWords, maxValue, current } = attributeData;
+            const { attribute, maxValue, current } = attributeData;
             const attributesHtml = `
-                <small>Trigger Words: ${triggerWords}</small>
-                <small>Max Value: ${maxValue}</small>
-                <small>Current: ${current}</small>
+                <small>${attribute}: ${current}/${maxValue}</small>
             `;
             recentMessage.append(attributesHtml); // Append the attributes to the most recent message
         }
