@@ -1,34 +1,38 @@
-<div div class="inline-drawer">
-    <label title="Enable for this chat" for="advanced_rpg_chat_enabled" class="checkbox_label">
-        <input class="checkbox" value="true" type="checkbox" id="advanced_rpg_chat_enabled">
-        <span data-i18n="Enable for Chat">Enable for Chat</span>
-    </label>
-    <div data-i18n="Add Element" class="menu_button menu_button_icon interactable" id="advanced_rpg_add_element" tabindex="0">
-        Add Element
+<div>
+    <div class="inline-drawer">
+        <label title="Enable for this chat" for="advanced_rpg_chat_enabled" class="checkbox_label">
+            <input class="checkbox" value="true" type="checkbox" id="advanced_rpg_chat_enabled">
+            <span data-i18n="Enable for Chat">Enable for Chat</span>
+        </label>
+        <div data-i18n="Add Element" class="menu_button menu_button_icon interactable" id="advanced_rpg_add_element" tabindex="0">
+            Add Element
+        </div>
     </div>
 </div>
 <div id="entriesContainer"></div>
 
 <!-- Hidden template for new entries -->
-<fieldset id="entryTemplate" style="display: none;">
-    <div class="flex-container">
+<div id="entryTemplate" style="display: none;">
+    <div class="inline-drawer">
         <label>
             Trigger Keyword: 
-            <input type="text" placeholder="Enter keyword">
+            <input type="text" placeholder="Enter keyword" class="input-text">
         </label>
         <label>
             Attribute: 
-            <input type="text" placeholder="HP, MP, etc.">
+            <input type="text" placeholder="HP, MP, etc." class="input-text">
         </label>
         <label>
             Max Attribute: 
-            <input type="number" placeholder="Enter max value">
+            <input type="number" placeholder="Enter max value" class="input-text">
         </label>
-        <label>
-            For User 
-            <input type="checkbox">
+        <label title="For User" class="checkbox_label">
+            <input class="checkbox" type="checkbox">
+            <span data-i18n="For User">For User</span>
         </label>
-        <button class="removeEntry">Remove</button>
+        <div class="menu_button menu_button_icon interactable removeEntry" tabindex="0">
+            Remove
+        </div>
     </div>
 </div>
 
