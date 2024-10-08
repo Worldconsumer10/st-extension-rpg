@@ -48,7 +48,8 @@ jQuery(async ()=>{
                         return {
                             triggerWords: prop.triggerWords,
                             maxValue: prop.maxValue,
-                            current: prop.current
+                            current: prop.current,
+                            isDefault: prop.isDefault
                         };
                     }
                 }
@@ -76,7 +77,13 @@ jQuery(async ()=>{
             
             if (existingProps) {
                 // Update existing entry
-                Object.assign(existingProps, currentData);
+                Object.assign(existingProps, {
+                    isDefault:existingProps.isDefault,
+                    triggerWords:currentData.triggerWords,
+                    attribute:currentData.attribute,
+                    maxValue:currentData.maxValue,
+                    current:currentData.current
+                });
             } else {
                 // Add new entry
                 extension_settings[extensionName][charName].chatProperties.push({
@@ -101,7 +108,12 @@ jQuery(async ()=>{
             const attribute = $(this).val().trim();
             const existingData = findDataFromAttribute(attribute)
             if (existingData == null){
+                newEntry.find('.saveDefault').show()
                 return
+            }
+            if (existingData.isDefault)
+            {
+                newEntry.find('.saveDefault').hide()
             }
             newEntry.find('.trigger_keywords').val(existingData.triggerWords)
             newEntry.find('.max_value').val(existingData.maxValue)
