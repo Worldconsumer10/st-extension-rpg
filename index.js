@@ -1,4 +1,4 @@
-const {addDropdown} = require('./advancedRPGHandler')
+import { addDropdown } from "./advancedRPGHandler"
 
 jQuery(()=>{
     addDropdown()
