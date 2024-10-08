@@ -37,6 +37,8 @@ function addAttributes(){
         });
 
         // Access chat properties for the current character
+        if (typeof(extension_settings[extensionName]) == "undefined" || typeof(extension_settings[extensionName][name]) == "undefined")
+        {return;}
         const chatProperties = extension_settings[extensionName][name].chatProperties;
 
         // Find the relevant attribute data (assuming you want to find a specific attribute)
