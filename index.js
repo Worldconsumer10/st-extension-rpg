@@ -5,6 +5,47 @@ import { saveSettingsDebounced } from "../../../../script.js";
 const extensionName = "st-extension-rpg";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
 
+function generateIntercepted(chat){
+    try{
+        addAttributes()
+    }catch{}
+}
+
+window['rpgStats_generationInterceptor'] = generateIntercepted;
+function addAttributes(){
+    const messages = $(".mes"); // Select all messages with class "mes"
+    const charName = getCharacterName(); // Get the current character name
+
+    // Find the most recent message from any character
+    const recentMessage = messages.last(); // Get the most recent message regardless of the character
+
+    // If a recent message exists, process it
+    if (recentMessage.length) {
+        // Remove any existing attributes from all messages of this character
+        messages.each(function() {
+            if ($(this).find('.name_text').text().trim() === charName) {
+                $(this).find("small").remove(); // Remove <small> elements from this character's messages
+            }
+        });
+
+        // Access chat properties for the current character
+        const chatProperties = extension_settings[extensionName][charName].chatProperties;
+
+        // Find the relevant attribute data (assuming you want to find a specific attribute)
+        const attributeData = chatProperties.find(prop => prop.attribute === 'yourAttribute'); // Replace 'yourAttribute' with the actual attribute
+
+        // Add attributes to the recent message
+        if (attributeData) {
+            const { triggerWords, maxValue, current } = attributeData;
+            const attributesHtml = `
+                <small>Trigger Words: ${triggerWords}</small>
+                <small>Max Value: ${maxValue}</small>
+                <small>Current: ${current}</small>
+            `;
+            recentMessage.append(attributesHtml); // Append the attributes to the most recent message
+        }
+    }
+}
 
 jQuery(async ()=>{
     if (typeof(extension_settings[extensionName]) == "undefined")
@@ -35,17 +76,32 @@ jQuery(async ()=>{
         });
     
         function findDataFromAttribute(attribute){
+            const username = getContext().name1
             const charName = getCharacterName(); // Get the current character name
             const chatId = getChatId(); // Get the current chat ID
             const forPlayer = Boolean(newEntry.find('.forUserCheckbox').val())
         
+            var targetName = charName
+            if (forPlayer){
+                targetName = username
+            }
             // Check if the character settings exist
-            if (typeof extension_settings[extensionName][charName] !== "undefined") {
-                const chatProperties = extension_settings[extensionName][charName].chatProperties;
+            if (typeof extension_settings[extensionName][targetName] !== "undefined") {
+                const chatProperties = extension_settings[extensionName][targetName].chatProperties;
         
                 // Search for the matching attribute in the chatProperties
                 for (let prop of chatProperties) {
-                    if (prop.attribute === attribute && prop.isPlayer == forPlayer) {
+                    if (prop.attribute === attribute && prop.chatId == chatId) {
+                        return {
+                            triggerWords: prop.triggerWords,
+                            maxValue: prop.maxValue,
+                            current: prop.current,
+                            isDefault: prop.isDefault
+                        };
+                    }
+                }
+                for (let prop of chatProperties) {
+                    if (prop.attribute === attribute) {
                         return {
                             triggerWords: prop.triggerWords,
                             maxValue: prop.maxValue,
@@ -61,6 +117,7 @@ jQuery(async ()=>{
         }
 
         function saveData(isDefault){
+            const username = getContext().name1
             const triggerWords = newEntry.find('.trigger_keywords').val().trim();
             const attribute = newEntry.find('.attribute_word').val().trim();
             const maxValue = newEntry.find('.max_value').val().trim() || '0';
@@ -71,12 +128,15 @@ jQuery(async ()=>{
                 triggerWords: triggerWords,
                 attribute: attribute,
                 maxValue: maxValue,
-                isPlayer:forPlayer,
                 current: maxValue // Initial current value set to max value
             };
-    
+            var targetName = charName
+            if (forPlayer){
+                targetName = username
+            }
+                
             // Check if chatProperties already has an entry for this chatId
-            const existingProps = extension_settings[extensionName][charName].chatProperties.find(prop => prop.chatId === chatId);
+            const existingProps = extension_settings[extensionName][targetName].chatProperties.find(prop => prop.chatId === chatId);
             
             if (existingProps) {
                 // Update existing entry
@@ -89,7 +149,7 @@ jQuery(async ()=>{
                 });
             } else {
                 // Add new entry
-                extension_settings[extensionName][charName].chatProperties.push({
+                extension_settings[extensionName][targetName].chatProperties.push({
                     chatId: chatId,
                     ...currentData
                 });
