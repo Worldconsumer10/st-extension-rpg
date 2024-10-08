@@ -43,6 +43,7 @@ function addAttributes(){
         const attributeData = chatProperties.find(prop => prop.attribute === 'yourAttribute'); // Replace 'yourAttribute' with the actual attribute
 
         // Add attributes to the recent message
+        console.log("Adding Attributes To Entity")
         if (attributeData) {
             const { attribute, maxValue, current } = attributeData;
             const attributesHtml = `
