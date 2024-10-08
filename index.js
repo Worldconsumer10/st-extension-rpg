@@ -1,3 +1,5 @@
+import { getCharacterName } from "./characterHelper.js";
+
 const extensionName = "st-extension-rpg";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
 
@@ -8,7 +10,8 @@ jQuery(async ()=>{
     $("#character_popup").children().eq(4).after(element)
     $("#rpg_data_content").append(element2)
     $('#advanced_rpg_add_element').on('click', function() {
-        console.log("Adding Element")
+        const charName = getCharacterName()
+        console.log(charName)
         const template = $('#entryTemplate');
         const newEntry = template.clone().show(); // Clone and show the entry
         newEntry.find('.removeEntry').on('click', function() {
