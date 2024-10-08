@@ -19,6 +19,8 @@ function addAttributes(){
     const messages = $(".mes"); // Select all messages with class "mes"
     const charName = getCharacterName(); // Get the current character name
 
+    console.log(messages)
+
     // Find the most recent message from any character
     const recentMessage = messages.last(); // Get the most recent message regardless of the character
 
