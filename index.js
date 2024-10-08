@@ -17,7 +17,6 @@ function generateIntercepted(chat){
 window['rpgStats_generationInterceptor'] = generateIntercepted;
 function addAttributes(){
     const messages = $(".mes"); // Select all messages with class "mes"
-    const charName = getCharacterName(); // Get the current character name
 
     // Find the most recent message from any character
     const recentMessages = {};
@@ -28,13 +27,6 @@ function addAttributes(){
         recentMessages[nameText] = $(this); // Update with the latest message for each character
     });
 
-    // Clear old attributes from messages of the current character
-    messages.each(function() {
-        const nameText = $(this).find('.name_text').text().trim();
-        if (nameText === charName) {
-            $(this).find("small").remove(); // Remove <small> elements from this character's messages
-        }
-    });
     for (const name in recentMessages) {
         const message = recentMessages[name];
         // Remove any existing attributes from all messages of this character
@@ -45,7 +37,7 @@ function addAttributes(){
         });
 
         // Access chat properties for the current character
-        const chatProperties = extension_settings[extensionName][charName].chatProperties;
+        const chatProperties = extension_settings[extensionName][name].chatProperties;
 
         // Find the relevant attribute data (assuming you want to find a specific attribute)
         const attributeData = chatProperties.find(prop => prop.attribute === 'yourAttribute'); // Replace 'yourAttribute' with the actual attribute
