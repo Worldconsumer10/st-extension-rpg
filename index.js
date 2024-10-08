@@ -8,7 +8,7 @@ const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
 
 jQuery(async ()=>{
     if (typeof(extension_settings[extensionName]) == "undefined")
-    {Object.assign(extension_settings[extensionName],{});saveSettingsDebounced()}
+    {extension_settings[extensionName]={}; saveSettingsDebounced()}
     const element = await $.get(`${extensionFolderPath}/advancedTabRPG.html`);
     const element2 = await $.get(`${extensionFolderPath}/rpgEntry.html`);
     $("#character_popup").children().eq(4).after(element)
