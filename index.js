@@ -131,7 +131,16 @@ jQuery(async ()=>{
     
         $('#entriesContainer').append(newEntry); // Append the new entry
     });
-    $("#advanced_rpg_reset_character").on('click',function(){
+    $("#advanced_rpg_reset_character_attributes").on('click',function(){
+        const charName = getCharacterName();
+        if (typeof(extension_settings[extensionName][charName]) != "undefined") {
+            extension_settings[extensionName][charName] = {
+                chatProperties: []
+            };
+            saveSettingsDebounced();
+        }
+    })
+    $("#advanced_rpg_reset_character_defaults").on('click',function(){
         const charName = getCharacterName();
     
         // Attribute storage method
