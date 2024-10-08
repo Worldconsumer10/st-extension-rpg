@@ -1,11 +1,12 @@
 const extensionName = "st-extension-rpg";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
 
-import { addDropdown } from "./advancedRPGHandler.js"
 
-jQuery(()=>{
-    addDropdown()
-    console.log("Adding Listener")
+jQuery(async ()=>{
+    const element = await $.get(`${extensionFolderPath}/advancedTabRPG.html`);
+    const element2 = await $.get(`${extensionFolderPath}/rpgEntry.html`);
+    $("#character_popup").children().eq(4).after(element)
+    $("#rpg_data_content").append(element2)
     $('#advanced_rpg_add_element').on('click', function() {
         console.log("Adding Element")
         const template = $('#entryTemplate');
