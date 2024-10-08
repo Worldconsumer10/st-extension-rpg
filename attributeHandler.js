@@ -1,4 +1,3 @@
-import { getContext } from "../../extensions.js";
 import { getCharacterName } from "./characterHelper.js";
 import { extension_settings, getContext } from "../../../extensions.js";
 import { saveSettingsDebounced } from "../../../../script.js";
