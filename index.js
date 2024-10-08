@@ -1,7 +1,10 @@
 import { getCharacterName } from "./characterHelper.js";
 import { extension_settings, getContext } from "../../../extensions.js";
-import { saveSettingsDebounced } from "../../../../script.js";
-
+import { 
+    saveSettingsDebounced,
+    event_types,
+    eventSource, 
+} from "../../../../script.js";
 const extensionName = "st-extension-rpg";
 const extensionFolderPath = `scripts/extensions/third-party/${extensionName}`;
 
