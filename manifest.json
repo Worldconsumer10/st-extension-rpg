@@ -1,7 +1,7 @@
 {
     "display_name": "RPG Characters",
     "loading_order": 1,
-    "requires": ["summary"],
+    "requires": ["summarize"],
     "optional": [],
     "js": "index.js",
     "css": "style.css",
