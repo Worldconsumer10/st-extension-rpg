@@ -40,6 +40,7 @@ function setAttributeDisplay(){
 window['rpgStats_generationInterceptor'] = generateIntercepted;
 function addAttributes(){
     const messages = $(".mes"); // Select all messages with class "mes"
+    const chatId = getContext().chatId
 
     // Find the most recent message from any character
     const recentMessages = {};
@@ -65,7 +66,7 @@ function addAttributes(){
         const chatProperties = extension_settings[extensionName][name].chatProperties;
 
         // Find the relevant attribute data (assuming you want to find a specific attribute)
-        const attributeData = chatProperties.find(prop => prop.attribute === 'yourAttribute'); // Replace 'yourAttribute' with the actual attribute
+        const attributeData = chatProperties.find(prop => prop.chatId === chatId); // Replace 'yourAttribute' with the actual attribute
 
         // Add attributes to the recent message
         console.log("Adding Attributes To Entity")
