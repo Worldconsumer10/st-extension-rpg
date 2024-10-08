@@ -45,6 +45,7 @@ function addAttributes(){
         // Add attributes to the recent message
         console.log("Adding Attributes To Entity")
         if (attributeData) {
+            console.log("Added Attributes To Entity")
             const { attribute, maxValue, current } = attributeData;
             const attributesHtml = `
                 <small>${attribute}: ${current}/${maxValue}</small>
