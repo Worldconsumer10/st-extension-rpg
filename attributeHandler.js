@@ -8,8 +8,8 @@ export function init(){
         const charName = getCharacterName()
         if (typeof(extension_settings[extensionName]) == "undefined")
         {extension_settings[extensionName]={}}
-        const template = document.getElementById('entryTemplate');
-        const newEntry = template.cloneNode(true);
+        const template = $('#entryTemplate');
+        const newEntry = template.clone();
         newEntry.style.display = ''; // Show the cloned entry
 
         // Add functionality to remove entry
@@ -28,7 +28,7 @@ export function init(){
         });
 
         console.log(getContext().chat)
-        document.getElementById('entriesContainer').appendChild(newEntry);
+        $('#entriesContainer').append(newEntry);
         if (typeof(extension_settings[extensionName][charName]) == "undefined")
         {
             extension_settings[extensionName][charName]={
