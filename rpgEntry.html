@@ -1,0 +1,46 @@
+<div>
+    <button id="addElement">Add Element</button>
+    <label>
+        Enable for chat
+        <input type="checkbox" id="enableChat">
+    </label>
+</div>
+<div id="entriesContainer"></div>
+
+<!-- Hidden template for new entries -->
+<div id="entryTemplate" style="display: none;">
+    <div class="flex-container">
+        <label>
+            Trigger Keyword: 
+            <input type="text" placeholder="Enter keyword">
+        </label>
+        <label>
+            Attribute: 
+            <input type="text" placeholder="HP, MP, etc.">
+        </label>
+        <label>
+            Max Attribute: 
+            <input type="number" placeholder="Enter max value">
+        </label>
+        <label>
+            For User 
+            <input type="checkbox">
+        </label>
+        <button class="removeEntry">Remove</button>
+    </div>
+</div>
+
+<script>
+    document.getElementById('addElement').addEventListener('click', function() {
+        const template = document.getElementById('entryTemplate');
+        const newEntry = template.cloneNode(true);
+        newEntry.style.display = ''; // Show the cloned entry
+
+        // Add functionality to remove entry
+        newEntry.querySelector('.removeEntry').addEventListener('click', function() {
+            newEntry.remove();
+        });
+
+        document.getElementById('entriesContainer').appendChild(newEntry);
+    });
+</script>
