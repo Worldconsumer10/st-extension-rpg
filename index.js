@@ -41,13 +41,13 @@ window['rpgStats_generationInterceptor'] = generateIntercepted;
 function addAttributes(){
     const messages = $(".mes"); // Select all messages with class "mes"
     const chatId = getContext().chatId
-    const recentMessages = []
+    const recentMessages = {}
     for (let i = 0; i < messages.length; i++) {
         const element = messages[i];
         const name = $(element).find('.name_text').text()
-        console.log(element)
-        console.log(name)
+        recentMessages[name] = element
     }
+    console.log(recentMessages)
 }
 eventSource.on(event_types.CHAT_CHANGED, onCharAdvChanged);
 jQuery(async ()=>{
