@@ -8,7 +8,12 @@ import {
 } from "../../../../../script.js";
 
 eventSource.on(event_types.CHAT_CHANGED,function(){
-    console.log(getContext())
+    const context = getContext()
+    if (context.name2 == "")
+    {
+        toastr.error('Groups are not supported currently.','NOT IMPLEMENTED')
+        return;
+    }
 })
 
 function init(){
