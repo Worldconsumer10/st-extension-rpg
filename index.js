@@ -37,22 +37,38 @@ function setAttributeDisplay(){
     }
 }
 
+function findIndex(t,item)
+{
+    t.forEach((value,index) => {
+        if (value === item){
+            return index;
+        }
+    });
+    return -1
+}
+
 window['rpgStats_generationInterceptor'] = generateIntercepted;
 function addAttributes(){
     const messages = $(".mes"); // Select all messages with class "mes"
     const chatId = getContext().chatId
-    const recentMessages = {}
+    const recentMessages = []
     for (let i = 0; i < messages.length; i++) {
         const element = messages[i];
         const name = $(element).find('.name_text').text()
         if (!name.toLowerCase().includes("${characterName}".toLowerCase()))
-            recentMessages[name] = element
+        {
+            var index = findIndex(recentMessages,name)
+            if (index == -1)
+            {recentMessages[recentMessages.length]=element}
+            else
+            {recentMessages[index]=element}
+        }
     }
     console.log(recentMessages)
     for (let i = 0; i < recentMessages.length; i++) {
         const element = recentMessages[i];
         const value = $(element)
-        console.log(value)
+        console.log(element)
     }
 }
 eventSource.on(event_types.CHAT_CHANGED, onCharAdvChanged);
