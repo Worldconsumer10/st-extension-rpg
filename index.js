@@ -39,11 +39,11 @@ function setAttributeDisplay(){
 
 function findIndex(t,item)
 {
-    t.forEach((value,index) => {
-        if (value === item){
-            return index;
-        }
-    });
+    for (let i = 0; i < t.length; i++) {
+        const element = t[i];
+        if (element == item)
+        {return i}
+    }
     return -1
 }
 
