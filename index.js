@@ -42,10 +42,11 @@ function addAttributes(){
     const messages = $(".mes"); // Select all messages with class "mes"
     const chatId = getContext().chatId
     const recentMessages = []
-    messages.forEach(element => {
-        const name = element.find('.text_name')
-        print(name)
-    });
+    print(messages)
+    // messages.forEach(element => {
+    //     const name = element.find('.text_name')
+    //     print(name)
+    // });
 }
 eventSource.on(event_types.CHAT_CHANGED, onCharAdvChanged);
 jQuery(async ()=>{
