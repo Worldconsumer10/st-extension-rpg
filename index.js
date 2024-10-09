@@ -48,7 +48,10 @@ function addAttributes(){
         if (!name.toLowerCase().includes("${characterName}".toLowerCase()))
             recentMessages[name] = element
     }
-    console.log(recentMessages)
+    recentMessages.forEach(element => {
+        const value = $(element)
+        console.log(value)
+    });
 }
 eventSource.on(event_types.CHAT_CHANGED, onCharAdvChanged);
 jQuery(async ()=>{
