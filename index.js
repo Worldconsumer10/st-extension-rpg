@@ -41,37 +41,11 @@ window['rpgStats_generationInterceptor'] = generateIntercepted;
 function addAttributes(){
     const messages = $(".mes"); // Select all messages with class "mes"
     const chatId = getContext().chatId
-    // Find the most recent message from any character
-    const recentMessages = {};
-
-    // Iterate over each message to find the most recent for each character
-    messages.each(function() {
-        const nameText = $(this).find('.name_text').text().trim();
-        recentMessages[nameText] = $(this); // Update with the latest message for each character
+    const recentMessages = []
+    messages.forEach(element => {
+        const name = element.find('.text_name')
+        print(name)
     });
-
-    for (const name in recentMessages) {
-        const message = recentMessages[name];
-        // Remove any existing attributes from all messages of this character
-        messages.each(function() {
-            if ($(this).find('.name_text').text().trim() === name) {
-                $(this).find("small").remove(); // Remove <small> elements from this character's messages
-            }
-        });
-
-        // Access chat properties for the current character
-        if (typeof(extension_settings[extensionName]) == "undefined" || typeof(extension_settings[extensionName][name]) == "undefined")
-        {continue}
-        const chatProperties = extension_settings[extensionName][name].chatProperties.filter(x=>x.chatId==chatId);
-
-        chatProperties.forEach(element => {
-            const { attribute, maxValue, current } = element;
-            const attributesHtml = `
-                <small>${attribute}: ${current}/${maxValue}</small>
-            `;
-            message.prepend(attributesHtml); // Append the attributes to the most recent message
-        });
-    }
 }
 eventSource.on(event_types.CHAT_CHANGED, onCharAdvChanged);
 jQuery(async ()=>{
