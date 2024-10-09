@@ -8,7 +8,7 @@ import {
 } from "../../../../../script.js";
 
 eventSource.on(event_types.CHAT_CHANGED,function(){
-    console.log("Chat changed. RPG detected")
+    console.log(getContext())
 })
 
 function init(){
