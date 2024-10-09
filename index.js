@@ -58,6 +58,7 @@ function addAttributes(){
         if (!name.toLowerCase().includes("${characterName}".toLowerCase()))
         {
             var index = findIndex(recentMessages,name)
+            console.log(index)
             if (index == -1)
             {recentMessages[recentMessages.length]=element}
             else
