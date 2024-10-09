@@ -1,3 +1,3 @@
-import {init} from './advdesccfg/entry'
+import {init} from './advdesccfg/entry.js'
 
 try{init()}catch{}
