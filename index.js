@@ -53,13 +53,12 @@ function addAttributes() {
         }
     }
 
-    console.log(recentMessages);
-
     // Use Object.keys to iterate through recentMessages
     Object.keys(recentMessages).forEach(name => {
         const element = recentMessages[name]; // Access the element by name
-        const value = $(element);
-        console.log(value); // Log the jQuery-wrapped element
+        const value = $(element)[0];
+        const newElement = `<div>
+        <small>TEST</small></div>`
     });
 }
 eventSource.on(event_types.CHAT_CHANGED, onCharAdvChanged);
