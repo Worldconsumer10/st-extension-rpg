@@ -48,6 +48,7 @@ function addAttributes(){
         if (!name.toLowerCase().includes("${characterName}".toLowerCase()))
             recentMessages[name] = element
     }
+    console.log(recentMessages)
     for (let i = 0; i < recentMessages.length; i++) {
         const element = recentMessages[i];
         const value = $(element)
