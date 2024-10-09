@@ -59,6 +59,7 @@ function addAttributes() {
         const value = $(element)[0];
         const newElement = `<div>
         <small>TEST</small></div>`
+        value.prepend(newElement)
     });
 }
 eventSource.on(event_types.CHAT_CHANGED, onCharAdvChanged);
