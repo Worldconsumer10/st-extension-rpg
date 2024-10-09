@@ -45,6 +45,7 @@ function addAttributes(){
     for (let i = 0; i < messages.length; i++) {
         const element = messages[i];
         const name = $(element).find('.name_text').text()
+        if (name.toLowerCase().includes("${characterName}".toLowerCase()))
         recentMessages[name] = element
     }
     console.log(recentMessages)
