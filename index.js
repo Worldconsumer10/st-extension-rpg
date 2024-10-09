@@ -37,40 +37,30 @@ function setAttributeDisplay(){
     }
 }
 
-function findIndex(t,item)
-{
-    for (let i = 0; i < t.length; i++) {
-        const element = t[i];
-        if (element == item)
-        {return i}
-    }
-    return -1
-}
-
 window['rpgStats_generationInterceptor'] = generateIntercepted;
-function addAttributes(){
+function addAttributes() {
     const messages = $(".mes"); // Select all messages with class "mes"
-    const chatId = getContext().chatId
-    const recentMessages = []
+    const chatId = getContext().chatId;
+    const recentMessages = {};
+    
     for (let i = 0; i < messages.length; i++) {
         const element = messages[i];
-        const name = $(element).find('.name_text').text()
-        if (!name.toLowerCase().includes("${characterName}".toLowerCase()))
-        {
-            var index = findIndex(recentMessages,name)
-            console.log(index)
-            if (index == -1)
-            {recentMessages[recentMessages.length]=element}
-            else
-            {recentMessages[index]=element}
+        const name = $(element).find('.name_text').text();
+        
+        // Use characterName directly instead of using template literal
+        if (!name.toLowerCase().includes(characterName.toLowerCase())) {
+            recentMessages[name] = element; // Store the element by name
         }
     }
-    console.log(recentMessages)
-    for (let i = 0; i < recentMessages.length; i++) {
-        const element = recentMessages[i];
-        const value = $(element)
-        console.log(element)
-    }
+
+    console.log(recentMessages);
+
+    // Use Object.keys to iterate through recentMessages
+    Object.keys(recentMessages).forEach(name => {
+        const element = recentMessages[name]; // Access the element by name
+        const value = $(element);
+        console.log(value); // Log the jQuery-wrapped element
+    });
 }
 eventSource.on(event_types.CHAT_CHANGED, onCharAdvChanged);
 jQuery(async ()=>{
