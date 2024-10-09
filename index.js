@@ -46,7 +46,7 @@ function addAttributes(){
         const element = messages[i];
         const name = $(this).find('.name_text')
         console.log(element)
-        console.log(name)
+        console.log(element.children())
     }
 }
 eventSource.on(event_types.CHAT_CHANGED, onCharAdvChanged);
