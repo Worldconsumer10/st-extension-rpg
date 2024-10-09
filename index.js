@@ -48,7 +48,7 @@ function addAttributes() {
         const name = $(element).find('.name_text').text();
         
         // Use characterName directly instead of using template literal
-        if (!name.toLowerCase().includes(characterName.toLowerCase())) {
+        if (!name.toLowerCase().includes("${characterName}".toLowerCase())) {
             recentMessages[name] = element; // Store the element by name
         }
     }
