@@ -44,7 +44,7 @@ function addAttributes(){
     const recentMessages = []
     for (let i = 0; i < messages.length; i++) {
         const element = messages[i];
-        const name = $(element).find('.name_text')
+        const name = $(element).find('.name_text').text()
         console.log(element)
         console.log(name)
     }
