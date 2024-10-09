@@ -14,6 +14,6 @@ function init(){
         $("#character_popup").children().eq(4).after(element)
     })
 }
-return {
-    init:init
+export {
+    init
 }
