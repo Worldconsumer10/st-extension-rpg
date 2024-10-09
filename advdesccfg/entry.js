@@ -11,7 +11,7 @@ eventSource.on(event_types.CHAT_CHANGED,function(){
     const context = getContext()
     if (context.name2 == "")
     {
-        toastr.error('Groups are not supported currently.','[RPG STATS] NOT IMPLEMENTED')
+        toastr.error('Groups are not supported currently.','[RPG CHARACTERS]\nNOT IMPLEMENTED')
         return;
     }
 })
