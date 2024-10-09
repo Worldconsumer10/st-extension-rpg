@@ -1,0 +1,34 @@
+<div class="inline-drawer">
+    <div class="inline-drawer-toggle inline-drawer-header">
+        <h4 data-i18n="RPG Data">
+            <span data-i18n="RPG Data">RPG Data</span>
+        </h4>
+        <div class="inline-drawer-icon fa-solid interactable down fa-circle-chevron-down" tabindex="0"></div>
+    </div>
+    <div class="inline-drawer-content" id="rpg_data_content" style="display: none;"></div>
+    <div class="inline-drawer">
+        <small id="char_attribute_count">Lyssa's Attributes: 0</small>
+        <small id="user_attribute_count">Yiltian's Attributes: 1</small>
+        <label title="Enable for this chat" for="advanced_rpg_chat_enabled" class="checkbox_label">
+            <input class="checkbox" value="true" type="checkbox" id="advanced_rpg_chat_enabled">
+            <span data-i18n="Enable for Chat">Enable for Chat</span>
+        </label>
+        <div data-i18n="Add Element" class="menu_button menu_button_icon interactable" id="advanced_rpg_reset_character_defaults" hidden="" tabindex="0">
+            Reset Character Defaults
+        </div>
+        <div data-i18n="Add Element" class="menu_button menu_button_icon interactable" id="advanced_rpg_reset_character_attributes" hidden="" tabindex="0">
+            Reset Character Attributes
+        </div>
+        <div data-i18n="Add Element" class="menu_button menu_button_icon interactable" id="advanced_rpg_add_element" tabindex="0">
+            Add Element
+        </div>
+    </div>
+</div>
+<div id="entriesContainer"></div>
+
+<!-- Hidden template for new entries -->
+<fieldset id="entryTemplate" style="display: none;">
+    <small>
+        NOT IMPLEMENTED
+    </small>
+</fieldset>
