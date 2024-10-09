@@ -44,9 +44,9 @@ function addAttributes(){
     const recentMessages = []
     for (let i = 0; i < messages.length; i++) {
         const element = messages[i];
-        const name = $(this).find('.name_text')
+        const name = $(element).find('.name_text')
         console.log(element)
-        console.log(element[4])
+        console.log(name)
     }
 }
 eventSource.on(event_types.CHAT_CHANGED, onCharAdvChanged);
