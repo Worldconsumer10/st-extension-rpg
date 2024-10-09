@@ -42,7 +42,7 @@ function addAttributes(){
     const messages = $(".mes"); // Select all messages with class "mes"
     const chatId = getContext().chatId
     const recentMessages = []
-    print(messages)
+    console.log(messages)
     // messages.forEach(element => {
     //     const name = element.find('.text_name')
     //     print(name)
