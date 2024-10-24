@@ -31,9 +31,24 @@ function addAdvDesc(){
         $("#persona-management-block").children().eq(1).append(element);
         $("#character_popup").children().eq(4).after(element);
 
+        if (typeof(extension_settings[extensionName]["attributes"]) != "undefined" && typeof(extension_settings[extensionName]["attributes"][getUserName()]) != "undefined")
+        {
+            for (const key in extension_settings[extensionName]["attributes"][username]) {
+                if (Object.prototype.hasOwnProperty.call(extension_settings[extensionName]["attributes"][username], key)) {
+                    const element = extension_settings[extensionName]["attributes"][username][key];
+                    const newAttributeElement = $(attributeElementTemplate).clone();
+                    $("#rpg_topcontent_tab").append(newAttributeElement);
+                    newAttributeElement.find("#att_name").text(key)
+                    newAttributeElement.find("#att_val").text(element)
+                    newAttributeElement.find("#att_saved").text("🔵 Loaded")
+                }
+            }
+        }
+
         $(".add_char_attribute").on("click", function() {
             const newAttributeElement = $(attributeElementTemplate).clone();
             $("#rpg_topcontent_tab").append(newAttributeElement);
+        
             newAttributeElement.find("#removeButton").on("click", function() {
                 newAttributeElement.remove();
             });
@@ -43,15 +58,12 @@ function addAdvDesc(){
                 if (typeof(extension_settings[extensionName]["attributes"]) == "undefined")
                 {extension_settings[extensionName]["attributes"]={}}
                 if (typeof(extension_settings[extensionName]["attributes"][username]) == "undefined")
-                {extension_settings[extensionName]["attributes"][username]=[]}
+                {extension_settings[extensionName]["attributes"][username]={}}
 
                 const attributeName = newAttributeElement.find("#att_name").text()
                 const attributeValue = newAttributeElement.find("#att_val").text()
 
-                extension_settings[extensionName]["attributes"][username].push({
-                    name:attributeName,
-                    value:attributeValue
-                })
+                extension_settings[extensionName]["attributes"][username][attributeName] = attributeValue
                 saveSettingsDebounced()
                 newAttributeElement.find("#att_saved").text("🟢 Saved")
             });
