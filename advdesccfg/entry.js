@@ -22,7 +22,7 @@ function addAdvDesc(){
         {extension_settings[extensionName]={}; saveSettingsDebounced()}
         const element = await $.get(`${extensionFolderPath}/advdesccfg/char_data.html`);
         const attributeElement = await $.get(`${extensionFolderPath}/advdesccfg/attribute.html`);
-        $("#persona-management-block").children().eq(1).children().after(element)
+        $("#persona-management-block").children().eq(2).children().after(element)
         $("#character_popup").children().eq(4).after(element)
         $(".add_char_attribute").on("click",function(){
             $("#rpg_topcontent_tab").append(attributeElement)
