@@ -35,6 +35,7 @@ function debouncedRender(){
         if (Object.prototype.hasOwnProperty.call(mess_sel, key)) {
             const element = mess_sel[key];
             const item = $.get(`${extensionFolderPath}/chatdesc/attribute_entry.html`)
+            item.show()
             $(element).prepend(item);
         }
     }
