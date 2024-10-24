@@ -12,26 +12,27 @@ const forChatRender = updateChatDisplay
 eventSource.on(event_types.CHAT_CHANGED,updateChatDisplay)
 
 function updateChatDisplay(){
-    for (let i = 0; i < $(".rpg_element").length; i++) {
-        try{
-            const element = $(messages[i]);
-            element.remove()
-        }catch(e){}
-    }
-    var messages = $('.mes')
-    var mess_sel = {}
+    // Remove all previously added rpg_element elements
+    $(".rpg_element").remove(); 
+
+    var messages = $('.mes');
+    var mess_sel = {};
+    
+    // Select messages that aren't from the System
     for (let i = 0; i < messages.length; i++) {
         const element = $(messages[i]);
-        const messageSender = element.find(".name_text")[0].innerText
-        if (messageSender != "System"){
-            mess_sel[messageSender] = element
+        const messageSender = element.find(".name_text")[0].innerText;
+        if (messageSender !== "System"){
+            mess_sel[messageSender] = element;
         }
     }
+
+    // Add RPG elements to selected messages
     for (const key in mess_sel) {
         if (Object.prototype.hasOwnProperty.call(mess_sel, key)) {
             const element = mess_sel[key];
-            const addHTML = $(`<small class="rpg_element">HP: 100/100</small>`)
-            $(element).prepend(addHTML)
+            const addHTML = $('<small class="rpg_element">HP: 100/100</small>');
+            $(element).prepend(addHTML);
         }
     }
 }
