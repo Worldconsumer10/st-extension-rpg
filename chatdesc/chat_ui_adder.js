@@ -15,7 +15,6 @@ eventSource.on(event_types.MESSAGE_DELETED, debouncedRender);
 eventSource.on(event_types.CHAT_CHANGED,debouncedRender)
 
 async function debouncedRender(){
-    const attribute_entry = await $.get(`${extensionFolderPath}/chatdesc/attribute_entry.html`)
     // Remove all previously added rpg_element elements
     $(".rpg_element").remove(); 
 
@@ -35,7 +34,7 @@ async function debouncedRender(){
     for (const key in mess_sel) {
         if (Object.prototype.hasOwnProperty.call(mess_sel, key)) {
             const element = mess_sel[key];
-            $(element).prepend(attribute_entry);
+            $(element).prepend($(`<small class="rpg_element">NOT IMPLEMENTED</small>`));
         }
     }
 }
