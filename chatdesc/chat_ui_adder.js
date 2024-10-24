@@ -27,7 +27,7 @@ eventSource.on(event_types.CHAT_CHANGED,function(){
         if (Object.prototype.hasOwnProperty.call(mess_sel, key)) {
             const element = mess_sel[key];
             const addHTML = $(`<small>HP: 100/100</small>`)
-            $(element).prepend($(addHTML))
+            $(element).prepend(addHTML)
         }
     }
 })
