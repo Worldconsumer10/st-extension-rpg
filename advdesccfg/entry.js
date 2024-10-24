@@ -39,8 +39,8 @@ function addAdvDesc(){
                     const element = extension_settings[extensionName]["attributes"][username][key];
                     const newAttributeElement = $(attributeElementTemplate).clone();
                     $("#rpg_topcontent_tab").append(newAttributeElement);
-                    newAttributeElement.find("#att_name").text(key)
-                    newAttributeElement.find("#att_val").text(element)
+                    newAttributeElement.find("#att_name").val(key)
+                    newAttributeElement.find("#att_val").val(element)
                     newAttributeElement.find("#att_saved").text("🔵 Loaded")
                     newAttributeElement.find("#removeButton").on("click", function() {
                         newAttributeElement.remove();
@@ -49,8 +49,7 @@ function addAdvDesc(){
                         {extension_settings[extensionName]["attributes"]={}}
                         if (typeof(extension_settings[extensionName]["attributes"][username]) == "undefined")
                         {extension_settings[extensionName]["attributes"][username]={}}
-                        const attributeName = newAttributeElement.find("#att_name").text()
-                        extension_settings[extensionName]["attributes"][username][attributeName] = undefined
+                        extension_settings[extensionName]["attributes"][username][key] = undefined
                     });
                     newAttributeElement.find("#saveButton").remove()
                 }
