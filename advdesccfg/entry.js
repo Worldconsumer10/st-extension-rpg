@@ -42,6 +42,17 @@ function addAdvDesc(){
                     newAttributeElement.find("#att_name").text(key)
                     newAttributeElement.find("#att_val").text(element)
                     newAttributeElement.find("#att_saved").text("🔵 Loaded")
+                    newAttributeElement.find("#removeButton").on("click", function() {
+                        newAttributeElement.remove();
+                        const username = getUserName()
+                        if (typeof(extension_settings[extensionName]["attributes"]) == "undefined")
+                        {extension_settings[extensionName]["attributes"]={}}
+                        if (typeof(extension_settings[extensionName]["attributes"][username]) == "undefined")
+                        {extension_settings[extensionName]["attributes"][username]={}}
+                        const attributeName = newAttributeElement.find("#att_name").text()
+                        extension_settings[extensionName]["attributes"][username][attributeName] = undefined
+                    });
+                    newAttributeElement.find("#saveButton").remove()
                 }
             }
         }
