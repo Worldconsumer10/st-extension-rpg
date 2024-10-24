@@ -28,7 +28,8 @@ function addAdvDesc(){
                 $("#rpg_topcontent_tab").children(':gt(0)').remove();
                 if (
                     typeof(extension_settings[extensionName]["attributes"]) != "undefined" &&
-                    typeof(extension_settings[extensionName]["attributes"][name]) != "undefined"
+                    typeof(extension_settings[extensionName]["attributes"][name]) != "undefined" ||
+                    extension_settings[extensionName]["attributes"][name].length == 0
                 ) {
                     const userAttributes = extension_settings[extensionName]["attributes"][name];
                 
