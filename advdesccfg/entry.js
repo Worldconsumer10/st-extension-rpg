@@ -22,14 +22,13 @@ function addAdvDesc(){
         var previousName = ""
         setInterval(() => {
             const name = $("#your_name").val()
-            if (previousName != name){
+            if (previousName != name && name != "" && name != "System"){
                 previousName = name
                 console.log(extension_settings[extensionName]["attributes"])
                 $("#rpg_topcontent_tab").children(':gt(0)').remove();
                 if (
                     typeof(extension_settings[extensionName]["attributes"]) != "undefined" &&
-                    typeof(extension_settings[extensionName]["attributes"][name]) != "undefined" ||
-                    extension_settings[extensionName]["attributes"][name].length > 0
+                    typeof(extension_settings[extensionName]["attributes"][name]) != "undefined"
                 ) {
                     const userAttributes = extension_settings[extensionName]["attributes"][name];
                 
