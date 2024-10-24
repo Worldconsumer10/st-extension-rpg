@@ -6,6 +6,7 @@ import {
     event_types,
     eventSource, 
 } from "../../../../../script.js";
+import {getCharacterName,getUserName} from "./../characterHelper.js"
 
 eventSource.on(event_types.CHAT_CHANGED,function(){
     const context = getContext()
@@ -30,17 +31,29 @@ function addAdvDesc(){
         $("#persona-management-block").children().eq(1).append(element);
         $("#character_popup").children().eq(4).after(element);
 
-        // Event to add new attribute element when clicked
         $(".add_char_attribute").on("click", function() {
-            // Clone the attributeElement to avoid modifying the original template
             const newAttributeElement = $(attributeElementTemplate).clone();
-
-            // Append the cloned element to the tab content
             $("#rpg_topcontent_tab").append(newAttributeElement);
-
-            // Add click handler for the remove button within the cloned element
             newAttributeElement.find("#removeButton").on("click", function() {
                 newAttributeElement.remove();
+            });
+            newAttributeElement.find("#saveButton").on("click", function() {
+                const username = getUserName()
+
+                if (typeof(extension_settings[extensionName]["attributes"]) == "undefined")
+                {extension_settings[extensionName]["attributes"]={}}
+                if (typeof(extension_settings[extensionName]["attributes"][username]) == "undefined")
+                {extension_settings[extensionName]["attributes"][username]=[]}
+
+                const attributeName = newAttributeElement.find("#att_name").text()
+                const attributeValue = newAttributeElement.find("#att_val").text()
+
+                extension_settings[extensionName]["attributes"][username].push({
+                    name:attributeName,
+                    value:attributeValue
+                })
+                saveSettingsDebounced()
+                newAttributeElement.find("#att_saved").text("🟢 Saved")
             });
         });
     });
