@@ -39,6 +39,7 @@ function addAdvDesc(){
                     const element = extension_settings[extensionName]["attributes"][username][key];
                     const newAttributeElement = $(attributeElementTemplate).clone();
                     $("#rpg_topcontent_tab").append(newAttributeElement);
+                    console.log(key,element)
                     newAttributeElement.find("#att_name").val(key)
                     newAttributeElement.find("#att_val").val(element)
                     newAttributeElement.find("#att_saved").text("🔵 Loaded")
