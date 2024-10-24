@@ -18,7 +18,7 @@ eventSource.on(event_types.CHAT_CHANGED,function(){
         if (messageSender != "System"){
             mess_sel[messageSender] = element
         }
-        const previousRPG = element.find("#rpg_elements")
+        const previousRPG = element.find("#rpg_element")
         if (previousRPG != null){
             $(previousRPG).remove()
         }
@@ -26,7 +26,7 @@ eventSource.on(event_types.CHAT_CHANGED,function(){
     for (const key in mess_sel) {
         if (Object.prototype.hasOwnProperty.call(mess_sel, key)) {
             const element = mess_sel[key];
-            const addHTML = $(`<small>HP: 100/100</small>`)
+            const addHTML = $(`<small id="rpg_element">HP: 100/100</small>`)
             $(element).prepend(addHTML)
         }
     }
