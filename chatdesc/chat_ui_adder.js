@@ -13,8 +13,10 @@ eventSource.on(event_types.CHAT_CHANGED,updateChatDisplay)
 
 function updateChatDisplay(){
     for (let i = 0; i < $(".rpg_element").length; i++) {
-        const element = $(messages[i]);
-        element.remove()
+        try{
+            const element = $(messages[i]);
+            element.remove()
+        }catch(e){}
     }
     var messages = $('.mes')
     var mess_sel = {}
