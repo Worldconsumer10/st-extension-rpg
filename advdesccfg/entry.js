@@ -36,41 +36,46 @@ function addAdvDesc(){
             typeof(extension_settings[extensionName]["attributes"][getUserName()]) !== "undefined"
         ) {
             const username = getUserName();
-            
-            for (const key in extension_settings[extensionName]["attributes"][username]) {
-                if (Object.prototype.hasOwnProperty.call(extension_settings[extensionName]["attributes"][username], key)) {
-                    const element = extension_settings[extensionName]["attributes"][username][key];
-                    const newAttributeElement = $(attributeElementTemplate).clone();
-                    
-                    // Append the cloned attribute element to the tab
-                    $("#rpg_topcontent_tab").append(newAttributeElement);
-                    
-                    // Set the values of the attribute elements based on the stored data
-                    newAttributeElement.find("#att_name").val(key);
-                    newAttributeElement.find("#att_val").val(element);
-                    newAttributeElement.find("#att_saved").text("🔵 Loaded");
-                    
-                    // Remove button functionality
-                    newAttributeElement.find("#removeButton").on("click", function () {
-                        newAttributeElement.remove();
-                        
-                        // Ensure the settings structure is initialized before removal
-                        if (typeof(extension_settings[extensionName]["attributes"]) === "undefined") {
-                            extension_settings[extensionName]["attributes"] = {};
-                        }
-                        if (typeof(extension_settings[extensionName]["attributes"][username]) === "undefined") {
-                            extension_settings[extensionName]["attributes"][username] = {};
-                        }
-                        
-                        // Remove the attribute from the settings
-                        delete extension_settings[extensionName]["attributes"][username][key];
-                        
-                        // Save the updated settings
-                        saveSettingsDebounced();
-                    });
-                    
-                    // Remove the save button since this attribute is already loaded
-                    newAttributeElement.find("#saveButton").remove();
+            const userAttributes = extension_settings[extensionName]["attributes"][username];
+        
+            for (const key in userAttributes) {
+                if (Object.prototype.hasOwnProperty.call(userAttributes, key)) {
+                    const element = userAttributes[key]; // 'element' is the value of the attribute
+        
+                    // Ensure that the key and element are valid before proceeding
+                    if (key && element) {
+                        const newAttributeElement = $(attributeElementTemplate).clone();
+        
+                        // Append the cloned attribute element to the tab
+                        $("#rpg_topcontent_tab").append(newAttributeElement);
+        
+                        // Set the values of the attribute elements based on the stored data
+                        newAttributeElement.find("#att_name").val(key);    // Set the attribute name (key)
+                        newAttributeElement.find("#att_val").val(element); // Set the attribute value (element)
+                        newAttributeElement.find("#att_saved").text("🔵 Loaded");
+        
+                        // Remove button functionality
+                        newAttributeElement.find("#removeButton").on("click", function () {
+                            newAttributeElement.remove();
+        
+                            // Ensure the settings structure is initialized before removal
+                            if (typeof(extension_settings[extensionName]["attributes"]) === "undefined") {
+                                extension_settings[extensionName]["attributes"] = {};
+                            }
+                            if (typeof(extension_settings[extensionName]["attributes"][username]) === "undefined") {
+                                extension_settings[extensionName]["attributes"][username] = {};
+                            }
+        
+                            // Remove the attribute from the settings
+                            delete extension_settings[extensionName]["attributes"][username][key];
+        
+                            // Save the updated settings
+                            saveSettingsDebounced();
+                        });
+        
+                        // Remove the save button since this attribute is already loaded
+                        newAttributeElement.find("#saveButton").remove();
+                    }
                 }
             }
         }
