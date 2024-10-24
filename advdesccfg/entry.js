@@ -23,6 +23,7 @@ function addAdvDesc(){
         setInterval(() => {
             const name = $("#your_name").val()
             if (previousName == name) return;
+            previousName = name
             $("#rpg_topcontent_tab").children(':gt(0)').remove();
             if (
                 typeof(extension_settings[extensionName]["attributes"]) !== "undefined" &&
