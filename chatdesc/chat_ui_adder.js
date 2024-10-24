@@ -14,7 +14,7 @@ eventSource.on(event_types.MESSAGE_DELETED, debouncedRender);
 
 eventSource.on(event_types.CHAT_CHANGED,debouncedRender)
 
-function debouncedRender(){
+async function debouncedRender(){
     // Remove all previously added rpg_element elements
     $(".rpg_element").remove(); 
 
@@ -34,7 +34,7 @@ function debouncedRender(){
     for (const key in mess_sel) {
         if (Object.prototype.hasOwnProperty.call(mess_sel, key)) {
             const element = mess_sel[key];
-            const item = $.get(`${extensionFolderPath}/chatdesc/attribute_entry.html`)
+            const item = await $.get(`${extensionFolderPath}/chatdesc/attribute_entry.html`)
             item.show()
             $(element).prepend(item);
         }
