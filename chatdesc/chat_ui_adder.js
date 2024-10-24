@@ -7,11 +7,15 @@ import {
     eventSource, 
 } from "../../../../../script.js";
 
-window["rpgStats_genChatUIIntercept"] = updateChatDisplay()
+const forChatRender = updateChatDisplay
 
 eventSource.on(event_types.CHAT_CHANGED,updateChatDisplay)
 
 function updateChatDisplay(){
+    for (let i = 0; i < $(".rpg_element").length; i++) {
+        const element = $(messages[i]);
+        element.remove()
+    }
     var messages = $('.mes')
     var mess_sel = {}
     for (let i = 0; i < messages.length; i++) {
@@ -20,15 +24,11 @@ function updateChatDisplay(){
         if (messageSender != "System"){
             mess_sel[messageSender] = element
         }
-        const previousRPG = element.find("#rpg_element")
-        if (previousRPG != null){
-            $(previousRPG).remove()
-        }
     }
     for (const key in mess_sel) {
         if (Object.prototype.hasOwnProperty.call(mess_sel, key)) {
             const element = mess_sel[key];
-            const addHTML = $(`<small id="rpg_element">HP: 100/100</small>`)
+            const addHTML = $(`<small class="rpg_element">HP: 100/100</small>`)
             $(element).prepend(addHTML)
         }
     }
@@ -41,5 +41,6 @@ function addChat(){
     })
 }
 export {
-    addChat
+    addChat,
+    forChatRender
 }
