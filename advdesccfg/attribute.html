@@ -3,5 +3,11 @@
     <textarea id="att_name" class="text_pole"></textarea>
     <label for="att_val">Max Value</label>
     <textarea id="att_val" class="text_pole"></textarea>
-    <div class="menu_button_icon menu_button interactable">Remove</div>
+    <div class="menu_button_icon menu_button interactable" onclick="removeParent(this)">Remove</div>
+    <script>
+        function removeParent(element){
+            console.log(element)
+            element.parent.remove()
+        }
+    </script>
 </fieldset>
