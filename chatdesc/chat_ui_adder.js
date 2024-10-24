@@ -7,11 +7,16 @@ import {
     eventSource, 
 } from "../../../../../script.js";
 
-const forChatRender = updateChatDisplay
+eventSource.on(event_types.CHAT_CHANGED, debouncedRender);
+eventSource.on(event_types.CHARACTER_MESSAGE_RENDERED, debouncedRender);
+eventSource.on(event_types.IMPERSONATE_READY, debouncedRender);
+eventSource.on(event_types.MESSAGE_DELETED, debouncedRender);
+eventSource.on(event_types.MESSAGE_EDITED, debouncedRender);
+eventSource.on(event_types.MESSAGE_SWIPED, debouncedRender);
 
-eventSource.on(event_types.CHAT_CHANGED,updateChatDisplay)
+eventSource.on(event_types.CHAT_CHANGED,debouncedRender)
 
-function updateChatDisplay(){
+function debouncedRender(){
     // Remove all previously added rpg_element elements
     $(".rpg_element").remove(); 
 
