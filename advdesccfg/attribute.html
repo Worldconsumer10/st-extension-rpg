@@ -6,8 +6,7 @@
     <div class="menu_button_icon menu_button interactable" onclick="removeParent(this)">Remove</div>
     <script>
         function removeParent(element){
-            console.log(element)
-            element.parent.remove()
+            $(element).parent().remove()
         }
     </script>
 </fieldset>
