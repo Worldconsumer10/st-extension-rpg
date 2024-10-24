@@ -47,6 +47,5 @@ function addChat(){
     })
 }
 export {
-    addChat,
-    forChatRender
+    addChat
 }
