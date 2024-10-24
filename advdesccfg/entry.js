@@ -21,7 +21,14 @@ function addAdvDesc(){
         if (typeof(extension_settings[extensionName]) == "undefined")
         {extension_settings[extensionName]={}; saveSettingsDebounced()}
         const element = await $.get(`${extensionFolderPath}/advdesccfg/char_data.html`);
+        const attributeElement = await $.get(`${extensionFolderPath}/advdesccfg/attribute.html`);
         $("#character_popup").children().eq(4).after(element)
+        element.on('click',function(){
+
+        })
+        element.find('.add_char_attribute').on("click",function(){
+            element.append(attributeElement)
+        })
         //Tab to add contents: $("#rpg_topcontent_tab")
     })
 }
