@@ -26,7 +26,9 @@ function addAdvDesc(){
         $("#character_popup").children().eq(4).after(element)
         $(".add_char_attribute").on("click",function(){
             $("#rpg_topcontent_tab").append(attributeElement)
-            attributeElement.find(".add_char_attribute").remove()
+            attributeElement.find("#removeButton").on("click",function(){
+                attributeElement.remove()
+            })
         })
         //Tab to add contents: $("#rpg_topcontent_tab")
     })
