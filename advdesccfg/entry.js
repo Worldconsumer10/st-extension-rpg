@@ -17,21 +17,33 @@ eventSource.on(event_types.CHAT_CHANGED,function(){
 })
 
 function addAdvDesc(){
-    jQuery(async()=>{
-        if (typeof(extension_settings[extensionName]) == "undefined")
-        {extension_settings[extensionName]={}; saveSettingsDebounced()}
+    jQuery(async () => {
+        if (typeof(extension_settings[extensionName]) == "undefined") {
+            extension_settings[extensionName] = {}; 
+            saveSettingsDebounced();
+        }
+
         const element = await $.get(`${extensionFolderPath}/advdesccfg/char_data.html`);
-        const attributeElement = await $.get(`${extensionFolderPath}/advdesccfg/attribute.html`);
+        const attributeElementTemplate = await $.get(`${extensionFolderPath}/advdesccfg/attribute.html`);
+
+        // Add element to persona-management block and character_popup
         $("#persona-management-block").children().eq(1).append(element);
-        $("#character_popup").children().eq(4).after(element)
-        $(".add_char_attribute").on("click",function(){
-            $("#rpg_topcontent_tab").append(attributeElement)
-            $(attributeElement).find("#removeButton").on("click",function(){
-                $(attributeElement).remove()
-            })
-        })
-        //Tab to add contents: $("#rpg_topcontent_tab")
-    })
+        $("#character_popup").children().eq(4).after(element);
+
+        // Event to add new attribute element when clicked
+        $(".add_char_attribute").on("click", function() {
+            // Clone the attributeElement to avoid modifying the original template
+            const newAttributeElement = $(attributeElementTemplate).clone();
+
+            // Append the cloned element to the tab content
+            $("#rpg_topcontent_tab").append(newAttributeElement);
+
+            // Add click handler for the remove button within the cloned element
+            newAttributeElement.find("#removeButton").on("click", function() {
+                newAttributeElement.remove();
+            });
+        });
+    });
 }
 export {
     addAdvDesc
