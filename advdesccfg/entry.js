@@ -30,8 +30,8 @@ function addAdvDesc(){
         };
         
         //--- Add a target node to the observer. Can only add one node at a time.
-        targetNodes.each(function() {
-          myObserver.observe(this, obsConfig);
+        targetNodes.each(function(index, element) {
+          myObserver.observe(element, obsConfig);
         });
         
         function mutationHandler(mutationRecords) {
