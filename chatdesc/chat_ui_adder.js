@@ -36,7 +36,6 @@ async function debouncedRender(){
         if (Object.prototype.hasOwnProperty.call(mess_sel, key)) {
             const element = mess_sel[key];
             $(element).prepend(attribute_entry);
-            attribute_entry.show()
         }
     }
 }
