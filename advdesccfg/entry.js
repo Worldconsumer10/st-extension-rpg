@@ -31,6 +31,7 @@ function addAdvDesc(){
         $("#persona-management-block").children().eq(1).append(element);
         $("#character_popup").children().eq(4).after(element);
 
+        console.log(extension_settings[extensionName]["attributes"])
         if (
             typeof(extension_settings[extensionName]["attributes"]) !== "undefined" &&
             typeof(extension_settings[extensionName]["attributes"][getUserName()]) !== "undefined"
