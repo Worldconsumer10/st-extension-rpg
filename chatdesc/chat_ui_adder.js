@@ -11,8 +11,6 @@ eventSource.on(event_types.CHAT_CHANGED, debouncedRender);
 eventSource.on(event_types.CHARACTER_MESSAGE_RENDERED, debouncedRender);
 eventSource.on(event_types.IMPERSONATE_READY, debouncedRender);
 eventSource.on(event_types.MESSAGE_DELETED, debouncedRender);
-eventSource.on(event_types.MESSAGE_EDITED, debouncedRender);
-eventSource.on(event_types.MESSAGE_SWIPED, debouncedRender);
 
 eventSource.on(event_types.CHAT_CHANGED,debouncedRender)
 
