@@ -29,7 +29,7 @@ function addAdvDesc(){
                 if (
                     typeof(extension_settings[extensionName]["attributes"]) != "undefined" &&
                     typeof(extension_settings[extensionName]["attributes"][name]) != "undefined" ||
-                    extension_settings[extensionName]["attributes"][name].length == 0
+                    extension_settings[extensionName]["attributes"][name].length > 0
                 ) {
                     const userAttributes = extension_settings[extensionName]["attributes"][name];
                 
@@ -73,6 +73,9 @@ function addAdvDesc(){
                             }
                         }
                     }
+                } else 
+                {
+                    extension_settings[extensionName]["attributes"][name] = {}
                 }
             }
         }, 10);
