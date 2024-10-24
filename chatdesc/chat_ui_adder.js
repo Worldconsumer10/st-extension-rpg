@@ -7,11 +7,13 @@ import {
     eventSource, 
 } from "../../../../../script.js";
 
-eventSource.on(event_types.CHAT_CHANGED,function(){
+window["rpgStats_genChatUIIntercept"] = updateChatDisplay()
+
+eventSource.on(event_types.CHAT_CHANGED,updateChatDisplay)
+
+function updateChatDisplay(){
     var messages = $('.mes')
     var mess_sel = {}
-    const user = getContext().name1
-    const ai = getContext().name2
     for (let i = 0; i < messages.length; i++) {
         const element = $(messages[i]);
         const messageSender = element.find(".name_text")[0].innerText
@@ -30,7 +32,7 @@ eventSource.on(event_types.CHAT_CHANGED,function(){
             $(element).prepend(addHTML)
         }
     }
-})
+}
 
 function addChat(){
     jQuery(async()=>{
