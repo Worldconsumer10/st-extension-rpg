@@ -15,9 +15,18 @@ eventSource.on(event_types.CHAT_CHANGED,function(){
     for (let i = 0; i < messages.length; i++) {
         const element = $(messages[i]);
         const messageSender = element.find(".name_text")[0].innerText
-        mess_sel[messageSender] = element
+        if (messageSender != "System"){
+            mess_sel[messageSender] = element
+        }
+        const previousRPG = element.find("#rpg_elements")
+        if (previousRPG != null){
+            $(previousRPG).remove()
+        }
     }
-    console.log(mess_sel)
+    mess_sel.forEach(element => {
+        const data = `<small>this is test text</small>`
+        $(element).prepend(data)
+    });
 })
 
 function addChat(){
