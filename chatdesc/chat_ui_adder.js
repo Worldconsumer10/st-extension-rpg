@@ -9,9 +9,14 @@ import {
 
 eventSource.on(event_types.CHAT_CHANGED,function(){
     var messages = $('.mes')
-    console.log(messages)
+    var mess_sel = {}
     const user = getContext().name1
     const ai = getContext().name2
+    for (let i = 0; i < messages.length; i++) {
+        const element = messages[i];
+        const messageSender = element.find(".name_text")
+        console.log(messageSender)
+    }
 })
 
 function addChat(){
