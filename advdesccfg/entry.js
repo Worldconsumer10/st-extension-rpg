@@ -23,7 +23,7 @@ function addAdvDesc(){
         setInterval(() => {
             const name = $("#your_name").val()
             if (previousName == name) return;
-            $("#rpg_topcontent_tab").empty()
+            $("#rpg_topcontent_tab").children().eq(1).empty()
             if (
                 typeof(extension_settings[extensionName]["attributes"]) !== "undefined" &&
                 typeof(extension_settings[extensionName]["attributes"][name]) !== "undefined"
@@ -84,8 +84,6 @@ function addAdvDesc(){
         // Add element to persona-management block and character_popup
         $("#persona-management-block").children().eq(1).append(element);
         $("#character_popup").children().eq(4).after(element);
-
-        console.log(extension_settings[extensionName]["attributes"])
         if (
             typeof(extension_settings[extensionName]["attributes"]) !== "undefined" &&
             typeof(extension_settings[extensionName]["attributes"][getUserName()]) !== "undefined"
