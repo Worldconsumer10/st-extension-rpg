@@ -33,6 +33,7 @@ function addAdvDesc(){
 
         if (typeof(extension_settings[extensionName]["attributes"]) != "undefined" && typeof(extension_settings[extensionName]["attributes"][getUserName()]) != "undefined")
         {
+            const username = getUserName()
             for (const key in extension_settings[extensionName]["attributes"][username]) {
                 if (Object.prototype.hasOwnProperty.call(extension_settings[extensionName]["attributes"][username], key)) {
                     const element = extension_settings[extensionName]["attributes"][username][key];
