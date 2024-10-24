@@ -24,7 +24,6 @@ function addAdvDesc(){
             const name = $("#your_name").val()
             if (previousName != name && name != "" && name != "System"){
                 previousName = name
-                console.log(extension_settings[extensionName]["attributes"])
                 $("#rpg_topcontent_tab").children(':gt(0)').remove();
                 if (
                     typeof(extension_settings[extensionName]["attributes"]) != "undefined" &&
@@ -51,19 +50,7 @@ function addAdvDesc(){
                                 // Remove button functionality
                                 newAttributeElement.find("#removeButton").on("click", function () {
                                     newAttributeElement.remove();
-                
-                                    // Ensure the settings structure is initialized before removal
-                                    if (typeof(extension_settings[extensionName]["attributes"]) == "undefined") {
-                                        extension_settings[extensionName]["attributes"] = {};
-                                    }
-                                    if (typeof(extension_settings[extensionName]["attributes"][name]) == "undefined") {
-                                        extension_settings[extensionName]["attributes"][name] = {};
-                                    }
-                
-                                    // Remove the attribute from the settings
                                     extension_settings[extensionName]["attributes"][name][key] = undefined;
-                
-                                    // Save the updated settings
                                     saveSettingsDebounced();
                                 });
                 
