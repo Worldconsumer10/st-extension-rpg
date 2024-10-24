@@ -25,7 +25,7 @@ eventSource.on(event_types.CHAT_CHANGED,function(){
     }
     mess_sel.forEach(element => {
         const data = `<small>this is test text</small>`
-        $(element).prepend(data)
+        $(element).prepend($(data))
     });
 })
 
