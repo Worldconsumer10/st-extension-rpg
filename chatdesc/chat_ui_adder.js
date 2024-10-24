@@ -16,12 +16,12 @@ eventSource.on(event_types.CHAT_CHANGED,function(){
     });
 })
 
-function init(){
+function addChat(){
     jQuery(async()=>{
         if (typeof(extension_settings[extensionName]) == "undefined")
         {extension_settings[extensionName]={}; saveSettingsDebounced()}
     })
 }
 export {
-    init
+    addChat
 }

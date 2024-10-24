@@ -16,7 +16,7 @@ eventSource.on(event_types.CHAT_CHANGED,function(){
     }
 })
 
-function init(){
+function addAdvDesc(){
     jQuery(async()=>{
         if (typeof(extension_settings[extensionName]) == "undefined")
         {extension_settings[extensionName]={}; saveSettingsDebounced()}
@@ -26,5 +26,5 @@ function init(){
     })
 }
 export {
-    init
+    addAdvDesc
 }
