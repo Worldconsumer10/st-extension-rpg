@@ -81,13 +81,20 @@ function addAdvDesc(){
         
             newAttributeElement.find("#removeButton").on("click", function() {
                 newAttributeElement.remove();
-                const username = getUserName()
-                if (typeof(extension_settings[extensionName]["attributes"]) == "undefined")
-                {extension_settings[extensionName]["attributes"]={}}
-                if (typeof(extension_settings[extensionName]["attributes"][username]) == "undefined")
-                {extension_settings[extensionName]["attributes"][username]={}}
-                const attributeName = newAttributeElement.find("#att_name").text()
-                extension_settings[extensionName]["attributes"][username][attributeName] = undefined
+                
+                // Ensure the settings structure is initialized before removal
+                if (typeof(extension_settings[extensionName]["attributes"]) === "undefined") {
+                    extension_settings[extensionName]["attributes"] = {};
+                }
+                if (typeof(extension_settings[extensionName]["attributes"][username]) === "undefined") {
+                    extension_settings[extensionName]["attributes"][username] = {};
+                }
+                
+                // Remove the attribute from the settings
+                delete extension_settings[extensionName]["attributes"][username][key];
+                
+                // Save the updated settings
+                saveSettingsDebounced();
             });
             newAttributeElement.find("#saveButton").on("click", function() {
                 const username = getUserName()
