@@ -19,15 +19,16 @@ eventSource.on(event_types.CHAT_CHANGED,function(){
 
 function addAdvDesc(){
     jQuery(async () => {
-        var previousName = $("#your_name").val()
+        var previousName = ""
         setInterval(() => {
             const name = $("#your_name").val()
             if (previousName != name){
                 previousName = name
+                console.log(extension_settings[extensionName]["attributes"])
                 $("#rpg_topcontent_tab").children(':gt(0)').remove();
                 if (
-                    typeof(extension_settings[extensionName]["attributes"]) !== "undefined" &&
-                    typeof(extension_settings[extensionName]["attributes"][name]) !== "undefined"
+                    typeof(extension_settings[extensionName]["attributes"]) != "undefined" &&
+                    typeof(extension_settings[extensionName]["attributes"][name]) != "undefined"
                 ) {
                     const userAttributes = extension_settings[extensionName]["attributes"][name];
                 
