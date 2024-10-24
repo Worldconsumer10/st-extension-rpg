@@ -23,10 +23,13 @@ eventSource.on(event_types.CHAT_CHANGED,function(){
             $(previousRPG).remove()
         }
     }
-    mess_sel.forEach(element => {
-        const data = `<small>this is test text</small>`
-        $(element).prepend($(data))
-    });
+    for (const key in mess_sel) {
+        if (Object.prototype.hasOwnProperty.call(mess_sel, key)) {
+            const element = mess_sel[key];
+            const addHTML = $(`<small>HP: 100/100</small>`)
+            $(element).prepend($(addHTML))
+        }
+    }
 })
 
 function addChat(){
