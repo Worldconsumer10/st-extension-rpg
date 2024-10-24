@@ -24,7 +24,8 @@ function onPlayerChanged(){
     // Create a new observer instance
     const observer = new MutationObserver(function(mutationsList) {
         for (let mutation of mutationsList) {
-            if (mutation.type === 'attributes' && mutation.attributeName === 'value') {
+            console.log(mutation)
+            if (mutation.type == 'attributes' && mutation.attributeName == 'value') {
                 $("#rpg_topcontent_tab").empty()
                 if (
                     typeof(extension_settings[extensionName]["attributes"]) !== "undefined" &&
