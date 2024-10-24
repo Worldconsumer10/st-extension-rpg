@@ -23,7 +23,7 @@ function addAdvDesc(){
         const element = await $.get(`${extensionFolderPath}/advdesccfg/char_data.html`);
         const attributeElement = await $.get(`${extensionFolderPath}/advdesccfg/attribute.html`);
         $("#character_popup").children().eq(4).after(element)
-        $(".add_char_attribute")[0].on("click",function(){
+        $(".add_char_attribute").on("click",function(){
             $("#rpg_topcontent_tab").append(attributeElement)
         })
         //Tab to add contents: $("#rpg_topcontent_tab")
