@@ -61,7 +61,7 @@ function addAdvDesc(){
                                     }
                 
                                     // Remove the attribute from the settings
-                                    delete extension_settings[extensionName]["attributes"][name][key];
+                                    extension_settings[extensionName]["attributes"][name][key] = undefined;
                 
                                     // Save the updated settings
                                     saveSettingsDebounced();
