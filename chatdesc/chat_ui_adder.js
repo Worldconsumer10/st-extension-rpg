@@ -9,11 +9,9 @@ import {
 
 eventSource.on(event_types.CHAT_CHANGED,function(){
     var messages = $('.mes')
+    console.log(messages)
     const user = getContext().name1
     const ai = getContext().name2
-    messages.forEach(element => {
-        console.log(element)
-    });
 })
 
 function addChat(){
