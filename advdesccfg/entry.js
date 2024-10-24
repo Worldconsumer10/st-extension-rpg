@@ -78,9 +78,8 @@ function addAdvDesc(){
                 {extension_settings[extensionName]["attributes"]={}}
                 if (typeof(extension_settings[extensionName]["attributes"][username]) == "undefined")
                 {extension_settings[extensionName]["attributes"][username]={}}
-
-                const attributeName = newAttributeElement.find("#att_name").text()
-                const attributeValue = newAttributeElement.find("#att_val").text()
+                const attributeName = newAttributeElement.find("#att_name").val()
+                const attributeValue = newAttributeElement.find("#att_val").val()
                 console.log(attributeName,attributeValue)
 
                 extension_settings[extensionName]["attributes"][username][attributeName] = attributeValue
