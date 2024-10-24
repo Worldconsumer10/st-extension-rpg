@@ -52,6 +52,13 @@ function addAdvDesc(){
         
             newAttributeElement.find("#removeButton").on("click", function() {
                 newAttributeElement.remove();
+                const username = getUserName()
+                if (typeof(extension_settings[extensionName]["attributes"]) == "undefined")
+                {extension_settings[extensionName]["attributes"]={}}
+                if (typeof(extension_settings[extensionName]["attributes"][username]) == "undefined")
+                {extension_settings[extensionName]["attributes"][username]={}}
+                const attributeName = newAttributeElement.find("#att_name").text()
+                extension_settings[extensionName]["attributes"][username][attributeName] = undefined
             });
             newAttributeElement.find("#saveButton").on("click", function() {
                 const username = getUserName()
