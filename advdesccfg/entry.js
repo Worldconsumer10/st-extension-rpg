@@ -20,7 +20,7 @@ function addAdvDesc(){
     jQuery(async()=>{
         if (typeof(extension_settings[extensionName]) == "undefined")
         {extension_settings[extensionName]={}; saveSettingsDebounced()}
-        const element = await $.get(`${extensionFolderPath}/advdesccfg/owner.html`);
+        const element = await $.get(`${extensionFolderPath}/advdesccfg/char_data.html`);
         $("#character_popup").children().eq(4).after(element)
         //Tab to add contents: $("#rpg_topcontent_tab")
     })
