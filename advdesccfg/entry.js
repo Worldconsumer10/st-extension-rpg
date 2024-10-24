@@ -31,28 +31,46 @@ function addAdvDesc(){
         $("#persona-management-block").children().eq(1).append(element);
         $("#character_popup").children().eq(4).after(element);
 
-        if (typeof(extension_settings[extensionName]["attributes"]) != "undefined" && typeof(extension_settings[extensionName]["attributes"][getUserName()]) != "undefined")
-        {
-            const username = getUserName()
+        if (
+            typeof(extension_settings[extensionName]["attributes"]) !== "undefined" &&
+            typeof(extension_settings[extensionName]["attributes"][getUserName()]) !== "undefined"
+        ) {
+            const username = getUserName();
+            
             for (const key in extension_settings[extensionName]["attributes"][username]) {
                 if (Object.prototype.hasOwnProperty.call(extension_settings[extensionName]["attributes"][username], key)) {
                     const element = extension_settings[extensionName]["attributes"][username][key];
                     const newAttributeElement = $(attributeElementTemplate).clone();
+                    
+                    // Append the cloned attribute element to the tab
                     $("#rpg_topcontent_tab").append(newAttributeElement);
-                    console.log(key,element)
-                    newAttributeElement.find("#att_name").val(key)
-                    newAttributeElement.find("#att_val").val(element)
-                    newAttributeElement.find("#att_saved").text("🔵 Loaded")
-                    newAttributeElement.find("#removeButton").on("click", function() {
+                    
+                    // Set the values of the attribute elements based on the stored data
+                    newAttributeElement.find("#att_name").val(key);
+                    newAttributeElement.find("#att_val").val(element);
+                    newAttributeElement.find("#att_saved").text("🔵 Loaded");
+                    
+                    // Remove button functionality
+                    newAttributeElement.find("#removeButton").on("click", function () {
                         newAttributeElement.remove();
-                        const username = getUserName()
-                        if (typeof(extension_settings[extensionName]["attributes"]) == "undefined")
-                        {extension_settings[extensionName]["attributes"]={}}
-                        if (typeof(extension_settings[extensionName]["attributes"][username]) == "undefined")
-                        {extension_settings[extensionName]["attributes"][username]={}}
-                        extension_settings[extensionName]["attributes"][username][key] = undefined
+                        
+                        // Ensure the settings structure is initialized before removal
+                        if (typeof(extension_settings[extensionName]["attributes"]) === "undefined") {
+                            extension_settings[extensionName]["attributes"] = {};
+                        }
+                        if (typeof(extension_settings[extensionName]["attributes"][username]) === "undefined") {
+                            extension_settings[extensionName]["attributes"][username] = {};
+                        }
+                        
+                        // Remove the attribute from the settings
+                        delete extension_settings[extensionName]["attributes"][username][key];
+                        
+                        // Save the updated settings
+                        saveSettingsDebounced();
                     });
-                    newAttributeElement.find("#saveButton").remove()
+                    
+                    // Remove the save button since this attribute is already loaded
+                    newAttributeElement.find("#saveButton").remove();
                 }
             }
         }
